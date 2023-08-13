@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Processor</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+input[type="file"] {
+    display: block;
+    margin: 10px 0;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#outputContainer {
+    margin-top: 20px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Proccesor</h1>
+        <input type="file" id="imageInput" accept="image/*">
+        <div class="wrapper">
+            <div class="content">
+                <div class="row sizes">
+                    <div class="column Width">
+                        <label>WIDTH</label>
+                        <input type="number">
+                    </div><br>
+                    <div class="column Height">
+                        <label>HEIGHT</label>
+                        <input type="number">
+                    </div><br>
+                </div>
+            </div>
+        </div>
+        <button id="resizeButton">Resize Image</button>
+        <div id="outputContainer"></div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const imageInput = document.getElementById("imageInput");
+    const resizeButton = document.getElementById("resizeButton");
+    const outputContainer = document.getElementById("outputContainer");
+
+    resizeButton.addEventListener("click", () => {
+        const files = imageInput.files;
+        
+        if (files.length === 0) {
+            return;
+        }
+
+        for (const file of files) {
+            const img = document.createElement("img");
+            img.src = URL.createObjectURL(file);
+            img.style.maxWidth = "100%";
+            img.style.marginTop = "10px";
+
+            outputContainer.appendChild(img);
+        }
+    });
+});
+
+    </script>
+</body>
+</html>
